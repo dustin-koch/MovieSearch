@@ -29,10 +29,6 @@ class MovieListTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "🎥 Movie Results 🎥"
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return movies.count
@@ -57,17 +53,18 @@ class MovieListTableViewController: UITableViewController {
 
         return cell
     }
-    /*
-    // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        // IIDOO
+        if segue.identifier == "toMovieDetailView" {
+            guard let index = tableView.indexPathForSelectedRow?.row else { return }
+            let destinationVC = segue.destination as? MovieDetailViewController
+            let movie = movies[index]
+            destinationVC?.movie = movie
+        }
     }
-    */
-    
-    
+ 
 
 }//END OF CLASS
 
