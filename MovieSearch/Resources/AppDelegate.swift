@@ -16,6 +16,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        MovieController.shared.fetchMoviewith(title: "friday") { (movie) in
+            guard let movie = movie else { return }
+            print(movie)
+        }
         return true
     }
 
