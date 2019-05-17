@@ -17,17 +17,21 @@ struct Movie: Decodable {
     let votes: Int
     let posterPath: String
     
+    
     enum CodingKeys: String, CodingKey{
         case title
         case rating = "vote_average"
         case summary = "overview"
         case votes = "vote_count"
         case posterPath = "poster_path"
+        
     }
 }
 
 struct TopLevelMovieDictionary: Decodable {
     let results: [Movie]
 }
+
+
 
 

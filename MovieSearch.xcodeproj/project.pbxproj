@@ -55,13 +55,14 @@
 				CA1CD05D228F080D00928179 /* Movie.swift */,
 			);
 			name = Models;
-			path = ..;
+			path = ../..;
 			sourceTree = "<group>";
 		};
 		CA1CD062228F0EA800928179 /* Model Controller */ = {
 			isa = PBXGroup;
 			children = (
 				CA1CD060228F0EA200928179 /* MovieController.swift */,
+				CA1CD05F228F081100928179 /* Models */,
 			);
 			path = "Model Controller";
 			sourceTree = "<group>";
@@ -86,7 +87,6 @@
 			isa = PBXGroup;
 			children = (
 				CA1CD062228F0EA800928179 /* Model Controller */,
-				CA1CD05F228F081100928179 /* Models */,
 				CA1CD05A228F050000928179 /* View Controllers */,
 				CAC4587B228F049000027994 /* Views */,
 				CAC4587A228F045400027994 /* Resources */,

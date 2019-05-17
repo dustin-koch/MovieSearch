@@ -17,11 +17,10 @@ class MovieController {
     //MARK: - Properties
     var movieResults: [Movie] = []
     let baseMovieURL = URL(string: "https://api.themoviedb.org/3/search/movie")
-    let baseImageURL = URL(string: "http://image.tmdb.org/t/p/w500")
+    let baseImagePath = URL(string: "https://image.tmdb.org/t/p/w500")
     let apiKey = "5ea295b9c220e17b10a8f5d6c5b866cb"
     
     //MARK:- CRUD functions
-    //https://api.themoviedb.org/3/search/movie?api_key=5ea295b9c220e17b10a8f5d6c5b866cb&query=friday
     func fetchMoviewith(title: String, completion: @escaping ([Movie]?) -> Void ) {
         //Constructing proper URL
         guard let movieURL = baseMovieURL else { return }
@@ -47,38 +46,18 @@ class MovieController {
                 return
             }
         }.resume()
-        
-        
     }//End of movie fetch
     //http://image.tmdb.org/t/p/w500/z76scMklBnEC91CFqHcvqrS5coO.jpg
     func fetchMoviePosterFrom(movie: Movie, completion: @escaping (UIImage?) -> Void) {
-        
-        
+        //Construct image url for fetch
+        guard var posterUrl = baseImagePath else { return }
+        posterUrl.appendPathComponent(movie.posterPath)
+        //Datatask to get image from constructed URL
+        URLSession.shared.dataTask(with: posterUrl) { (data, _, error) in
+            guard let data = data else { return }
+            let image = UIImage(data: data)
+            completion(image)
+        }.resume()
     }//End of image fetch
     
-    
-    
 }//END OF CLASS
-
-
-//guard let baseURL = URL(string: "https://api.thecatapi.com/v1/images/search") else {return}
-//let apiKeyQueryItem = URLQueryItem(name: "api_key", value: "93fd4773-e79f-48ef-bf61-64e804d40c12")
-//var component = URLComponents(url: baseURL, resolvingAgainstBaseURL: true)
-//component?.queryItems = [apiKeyQueryItem]
-//guard let finalURL = component?.url else {return}
-//print(finalURL)
-//
-//URLSession.shared.dataTask(with: finalURL) { (data, _, error) in
-//    if let error = error {
-//        print("We lost your Kitty: \(error.localizedDescription)")
-//    }
-//    guard let data = data else {return}
-//    do{
-//        let arrayCat = try JSONDecoder().decode([Cat].self, from: data)
-//        completion(arrayCat[0])
-//    }catch{
-//        print(error.localizedDescription)
-//        completion(nil)
-//        return
-//    }
-//    }.resume()
