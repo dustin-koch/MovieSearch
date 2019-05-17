@@ -43,12 +43,15 @@ class MovieListTableViewController: UITableViewController {
         let movie = movies[indexPath.row]
         //Setting text
         cell.titleLabel.text = movie.title
-        cell.ratingLabel.text = "Rating: \(movie.rating) with \(movie.votes) votes"
-        cell.summaryLabel.text = movie.summary
+        cell.ratingLabel.text = (movie.rating == 0) ? "Movie not rated" : "Rating: \(movie.rating) with \(movie.votes) votes"
+        cell.summaryLabel.text = (movie.summary == "") ? "No summary available" : movie.summary
         //Setting image
         MovieController.shared.fetchMoviePosterFrom(movie: movie) { (image) in
             DispatchQueue.main.async {
                 cell.moviePosterImageView.image = image
+                if cell.moviePosterImageView.image == nil {
+                    cell.moviePosterImageView.image = UIImage(named: "noimage")
+                }
             }
         }
 
